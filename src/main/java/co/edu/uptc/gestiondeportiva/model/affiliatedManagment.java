@@ -1,8 +1,9 @@
 package co.edu.uptc.GestionDeportiva.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import java.util.List;
 
 @Document(collection = "affiliated")
 public class AffiliatedManagment {
@@ -12,6 +13,7 @@ public class AffiliatedManagment {
     private String lastName;
     private String dni;
     private Integer age;
+    private List<Event> listEvents;
 
     public AffiliatedManagment() {
     }
