@@ -1,44 +1,49 @@
-package co.edu.uptc.GestionDeportiva.model;
-
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+package co.edu.uptc.model;
 
 import java.util.List;
 
-@Document(collection = "affiliated")
-public class AffiliatedManagment {
-    @Id
-    private String _id;
+public class Affiliated {
+    private Integer id;
     private String name;
     private String lastName;
     private String dni;
     private Integer age;
     private List<Event> listEvents;
 
-    public AffiliatedManagment() {
+    public Affiliated(Integer id, String name, String lastName, String dni, Integer age, List<Event> listEvents) {
+        this.id = id;
+        this.name = name;
+        this.lastName = lastName;
+        this.dni = dni;
+        this.age = age;
+        this.listEvents = listEvents;
     }
 
-    public AffiliatedManagment(String name, String lastName, String dni, Integer age) {
+    public Affiliated(String name, String lastName, String dni, Integer age) {
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;
         this.age = age;
     }
 
-    public AffiliatedManagment(String _id, String name, String lastName, String dni, Integer age) {
-        this._id = _id;
-        this.name = name;
-        this.lastName = lastName;
-        this.dni = dni;
-        this.age = age;
+    @Override
+    public String toString() {
+        return "Affiliated{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dni='" + dni + '\'' +
+                ", age=" + age +
+                ", listEvents=" + listEvents +
+                '}';
     }
 
-    public String get_id() {
-        return _id;
+    public Integer getId() {
+        return id;
     }
 
-    public void set_id(String _id) {
-        this._id = _id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -71,16 +76,5 @@ public class AffiliatedManagment {
 
     public void setAge(Integer age) {
         this.age = age;
-    }
-
-    @Override
-    public String toString() {
-        return "affiliatedManagment{" +
-                "_id='" + _id + '\'' +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", dni='" + dni + '\'' +
-                ", age=" + age +
-                '}';
     }
 }
