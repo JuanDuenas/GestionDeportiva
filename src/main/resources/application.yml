@@ -1,0 +1,5 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://julianvelandia01:WyjuRjMC2v85M7WB@cluster0.dtddx5y.mongodb.net/
+      database: sport_managment
