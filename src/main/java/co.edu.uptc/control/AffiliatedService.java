@@ -15,8 +15,8 @@ public class AffiliatedService {
         return c.insert(affiliated);
     }
 
-    public void getAffiliated(){
-        c.getAffiliated();
+    public String getAffiliated(){
+        return c.getAffiliated();
     }
 
     public Affiliated updateAffiliated(ObjectId id, Affiliated affiliated){

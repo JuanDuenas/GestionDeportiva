@@ -1,37 +1,10 @@
-
-document.querySelector("#btn").addEventListener('click',()=>{
-    const  xhr = new XMLHttpRequest()
-
-
-    xhr.open("POST","http://localhost:3008/sample-jakarta/affiliated_servlet",true)
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.onreadystatechange=function (){
-        if(xhr.readyState === 4 && xhr.status === 200){
-           if(xhr.responseText){
-               alert("inserción satisfactoria")
-           }else{
-               alert("inserción no satisfactoria")
-           }
-        }
-    }
-    var name = document.querySelector("#name").value
-    var lastName = document.querySelector("#lastName").value
-    var dni = document.querySelector("#dni").value
-    var age = document.querySelector("#age").value
-
-    var data = `name=${name}&lastName=${lastName}&dni=${dni}&age=${age}`
-
-    xhr.send(data)
-
-})
 window.onload = function() {
     document.body.style.backgroundColor = "#f5f5f5";
     document.body.style.fontFamily = "Arial, sans-serif";
 
 
     var container = document.querySelector(".container");
-    container.style.backgroundImage = "url('Recursos/ColorHeader.png')";  // Usa tu imagen con fondo transparente
+    container.style.backgroundImage = "url('../Recursos/ColorHeader.png')";  // Usa tu imagen con fondo transparente
     container.style.backgroundColor = "rgba(0, 0, 0, 0.5)";  // Establece un color de fondo RGBA
     container.style.backgroundBlendMode = 'multiply';  // Mezcla la imagen de fondo con el color de fondo
     container.style.backgroundSize = "cover";
@@ -88,7 +61,7 @@ window.onload = function() {
 
     var subtitles = document.querySelectorAll(".subtitles");
     for(var i = 0; i < subtitles.length; i++) {
-        subtitles[i].style.backgroundImage = "url('Recursos/ColorHeader.png')";
+        subtitles[i].style.backgroundImage = "url('../Recursos/ColorHeader.png')";
         subtitles[i].style.padding = "20px";
         subtitles[i].style.margin = "2px 0";
         subtitles[i].style.textAlign = "left";

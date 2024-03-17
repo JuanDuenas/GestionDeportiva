@@ -1,33 +1,105 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es-ES">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>GUILLERMO LEON VALENCIA</title>
 </head>
 <body>
 
+<div class="container">
+    <div id="header" class="header">GUILLERMO LEON VALENCIA</div>
+    <div class="header2">CLUB DEPORTIVO</div>
+    <a href="pages/managmentEvent.html" style="text-decoration: none" class="button">Gestionar Eventos</a>
+    <a href="pages/managmentStudent.html" style="text-decoration: none" class="button">Gestionar Estudiantes</a>
+</div>
+<div class="containerText">
+    <div  class="subtitles">SOBRE NOSOTROS</div>
+    <div class="section">
+        <div class="lead">
+            En nuestra institución, entendemos la importancia del deporte en el desarrollo integral de nuestros estudiantes. Es por ello que ofrecemos una amplia variedad de disciplinas deportivas que no solo promueven la actividad física, sino también los valores de trabajo en equipo, disciplina y superación personal.
 
-    <table border="2">
-        <tr>
-            <td>Nombre: </td>
-            <td><input type="text" id="name" name="name" size="30"></td>
-        </tr>
-        <tr>
-            <td>Apellido: </td>
-            <td><input type="text" id="lastName" name="lastName" size="30"></td>
-        </tr>
-        <tr>
-            <td>DNI: </td>
-            <td><input type="text" id="dni" name="dni" size="30"></td>
-        </tr>
-        <tr>
-            <td>Edad: </td>
-            <td><input type="text" id="age" name="age" size="30"></td>
-        </tr>
-    </table>
-    <button id="btn" type="button">Send</button>
+            Desde la piscina con nuestra destacada selección de natación, hasta la intensidad y la estrategia en la cancha con nuestros equipos de básquetbol, fútbol, voleibol y ajedrez, cada deporte ofrece una experiencia única y enriquecedora para nuestros alumnos.
 
-</form>
-    <script src="js/scripts.js"></script>
+            Además, fomentamos la práctica de disciplinas como taekwondo, tenis y atletismo, que no solo fortalecen el cuerpo, sino también la mente y el espíritu competitivo.
+
+            A lo largo del año, nuestro colegio se llena de emoción y camaradería con diversos eventos deportivos donde nuestros estudiantes tienen la oportunidad de demostrar sus habilidades y talento. Ya sea en competiciones locales o representando a nuestra institución a nivel nacional, estamos orgullosos de cada logro alcanzado por nuestros equipos.
+
+            En esta sección de deportes, te invitamos a conocer más sobre cada una de nuestras disciplinas, los eventos deportivos en los que participamos y, por supuesto, a conocer a los talentosos integrantes que conforman nuestros equipos.
+            <br><br>¡Únete a la pasión por el deporte en el Colegio Guillermo León Valencia y sé parte de nuestro legado de excelencia y dedicación
+        </div>
+    </div>
+</div>
+<br>
+
+
+<div style="height: 100px">
+
+</div>
+<div class="container" style="width: 60%">
+    <div class="mb-3">
+        <h2 class="display-5" id="register">REGISTRATE</h2>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Nombre: </label>
+        <input class="form-control" type="text" id="name" name="name" size="30">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Apellido: </label>
+        <input class="form-control" type="text" id="lastName" name="lastName" size="30">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">DNI: </label>
+        <input class="form-control" type="text" id="dni" name="dni" size="30">
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Edad: </label>
+        <input class="form-control" type="text" id="age" name="age" size="30">
+    </div>
+
+    <button style="color: black;border: 2px solid black;border-radius: 10px;cursor: pointer;padding: 10px 20px;margin: 20px" id="btn" type="button">ENVIAR</button>
+</div>
+<div style="height: 100px">
+
+</div>
+
+<div class="mb-3">
+    <div class="container">
+        <footer class="py-5">
+            <div class="row">
+                <div class="col">
+                    <h5>Section</h5>
+                    <ul class="nav flex-column">
+                        <li class="nav-item mb-2"><a href="#header" class="nav-link p-0 text-muted">Inicio</a></li>
+                        <li class="nav-item mb-2"><a href="#register" class="nav-link p-0 text-muted">Registro</a></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <form>
+                        <h5>Contáctanos</h5>
+                        <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                            <label for="newsletter1" class="visually-hidden">Email address</label>
+                            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                            <button class="btn btn-primary" type="button">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+                <p>&copy; 2022 Company, Inc. All rights reserved.</p>
+                <ul class="list-unstyled d-flex">
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+                    <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+</div>
+<script src="js/scripts.js"></script>
 </body>
-</html>
+<html/>

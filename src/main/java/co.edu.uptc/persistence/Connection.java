@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Connection {
-    private List<Affiliated> listAffiliateds;
+    private List<Document> listAffiliateds;
     private Document document;
     private MongoCollection<Document> collection;
 
@@ -48,12 +48,22 @@ public class Connection {
         return affiliated;
     }
 
-    public void getAffiliated(){
+    public String getAffiliated(){
+        String line = "[";
         try(MongoCursor<Document> cursor = collection.find().iterator()){
+            long count = 1;
             while(cursor.hasNext()){
-                System.out.println(cursor.next());
+                if(collection.countDocuments() != count){
+                    count++;
+                    line = line+cursor.next().toJson()+",";
+                }else{
+                    line = line+cursor.next().toJson();
+                }
+
             }
+            line+="]";
         }
+        return line;
     }
 
     public Affiliated update(ObjectId id, Affiliated affiliated){
@@ -64,9 +74,6 @@ public class Connection {
                 Updates.set("dni",affiliated.getDni()),
                 Updates.set("age",affiliated.getAge())
         );
-
-        System.out.println(query.toString());
-        System.out.println(updates.toString());
 
         UpdateResult upResult = collection.updateOne(query,updates);
         return affiliated;
