@@ -8,6 +8,7 @@ import co.edu.uptc.persistence.Connection;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
+import org.bson.types.ObjectId;
 
 @WebServlet("/affiliated_servlet")
 public class AffiliatedServlet extends HttpServlet {
@@ -37,12 +38,10 @@ public class AffiliatedServlet extends HttpServlet {
         Affiliated affiliated = new Affiliated(name,lastName,dni,Integer.parseInt(age));
         PrintWriter out = resp.getWriter();
 
-        if(affiliatedService.insertAffiliated(affiliated) != null){
-            System.out.println("good");
+        if(affiliatedService.deleteAffiliated(new ObjectId("65f62513644559217f3188c3")) == true){
             out.println(affiliated);
         }else{
             out.println("");
-            System.out.println("bad");
         }
     }
 

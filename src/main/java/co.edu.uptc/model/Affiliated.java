@@ -3,14 +3,14 @@ package co.edu.uptc.model;
 import java.util.List;
 
 public class Affiliated {
-    private Integer id;
+    private String id;
     private String name;
     private String lastName;
     private String dni;
     private Integer age;
     private List<Event> listEvents;
 
-    public Affiliated(Integer id, String name, String lastName, String dni, Integer age, List<Event> listEvents) {
+    public Affiliated(String id, String name, String lastName, String dni, Integer age, List<Event> listEvents) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -38,11 +38,11 @@ public class Affiliated {
                 '}';
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

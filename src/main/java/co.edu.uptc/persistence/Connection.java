@@ -3,8 +3,15 @@ package co.edu.uptc.persistence;
 import co.edu.uptc.model.Affiliated;
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +19,7 @@ import java.util.List;
 public class Connection {
     private List<Affiliated> listAffiliateds;
     private Document document;
-    private MongoCollection collection;
+    private MongoCollection<Document> collection;
 
     public Connection(){
         listAffiliateds = new ArrayList<>();
@@ -42,20 +49,35 @@ public class Connection {
     }
 
     public void getAffiliated(){
-        collection.find();
+        try(MongoCursor<Document> cursor = collection.find().iterator()){
+            while(cursor.hasNext()){
+                System.out.println(cursor.next());
+            }
+        }
     }
 
-    public Affiliated update(Integer id, Affiliated affiliated){
-        document = new Document("id",id);
-        Document found = (Document) collection.find(new Document("_id",id)).first();
+    public Affiliated update(ObjectId id, Affiliated affiliated){
+        Bson query = Filters.eq("_id",id);
+        Bson updates = Updates.combine(
+                Updates.set("name",affiliated.getName()),
+                Updates.set("lastName",affiliated.getLastName()),
+                Updates.set("dni",affiliated.getDni()),
+                Updates.set("age",affiliated.getAge())
+        );
 
-        if(found != null){
-            System.out.println("Found user");
-        }
+        System.out.println(query.toString());
+        System.out.println(updates.toString());
 
-        BasicDBObject newDocument = new BasicDBObject();
-        newDocument.put("id",affiliated);
-        collection.updateOne(document,newDocument);
+        UpdateResult upResult = collection.updateOne(query,updates);
         return affiliated;
+    }
+
+    public boolean delete(ObjectId id){
+        Bson query = Filters.eq("_id",id);
+        DeleteResult deleteResult = collection.deleteOne(query);
+        if(deleteResult.getDeletedCount() > 0){
+            return true;
+        }
+        return false;
     }
 }
