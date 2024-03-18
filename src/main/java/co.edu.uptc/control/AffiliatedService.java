@@ -19,11 +19,15 @@ public class AffiliatedService {
         return c.getAffiliated();
     }
 
-    public Affiliated updateAffiliated(ObjectId id, Affiliated affiliated){
-        return c.update(id,affiliated);
+    public Affiliated updateAffiliated(String dni, Affiliated affiliated){
+        return c.update(dni,affiliated);
     }
 
     public boolean deleteAffiliated(String dni){
         return c.delete(dni);
+    }
+
+    public String getAffiliatedByDni(String dni){
+        return c.getAffiliatedByDni(dni);
     }
 }

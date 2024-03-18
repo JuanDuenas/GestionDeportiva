@@ -20,8 +20,8 @@ public class EventService {
         return c.getEvent();
     }
 
-    public Event updateEvent(ObjectId id, Event event){
-        return c.updateEvent(id,event);
+    public Event updateEvent(String dni, Event event){
+        return c.updateEvent(dni,event);
     }
 
     public boolean deleteEvent(ObjectId id){

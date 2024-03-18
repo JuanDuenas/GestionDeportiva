@@ -16,13 +16,13 @@ import org.bson.types.ObjectId;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.mongodb.client.model.Filters.*;
+
 public class Connection {
-    private List<Document> listAffiliateds;
     private Document document;
     private MongoCollection<Document> collection;
 
     public Connection(){
-        listAffiliateds = new ArrayList<>();
         MongoClientURI mongoClientURI = new MongoClientURI("mongodb+srv://julianvelandia01:WyjuRjMC2v85M7WB@cluster0.dtddx5y.mongodb.net/");
         MongoClient mongoClient = new MongoClient(mongoClientURI);
 
@@ -66,13 +66,25 @@ public class Connection {
         return line;
     }
 
-    public Affiliated update(ObjectId id, Affiliated affiliated){
-        Bson query = Filters.eq("_id",id);
+    public String getAffiliatedByDni(String dni){
+        String line = "[";
+        try(MongoCursor<Document> cursor = collection.find(and(eq("dni",dni))).iterator()){
+            line = line+cursor.next().toJson();
+            line+="]";
+        }
+        System.out.println("Connection "+line);
+        return line;
+    }
+
+    public Affiliated update(String dni, Affiliated affiliated){
+        Bson query = eq("dni",dni);
+
         Bson updates = Updates.combine(
                 Updates.set("name",affiliated.getName()),
                 Updates.set("lastName",affiliated.getLastName()),
                 Updates.set("dni",affiliated.getDni()),
-                Updates.set("age",affiliated.getAge())
+                Updates.set("age",affiliated.getAge()),
+                Updates.set("event",affiliated.getEvent().toString())
         );
 
         UpdateResult upResult = collection.updateOne(query,updates);
@@ -80,7 +92,7 @@ public class Connection {
     }
 
     public boolean delete(String dni){
-        Bson query = Filters.eq("dni",dni);
+        Bson query = eq("dni",dni);
         DeleteResult deleteResult = collection.deleteOne(query);
         System.out.println(dni);
         if(deleteResult.getDeletedCount() > 0){

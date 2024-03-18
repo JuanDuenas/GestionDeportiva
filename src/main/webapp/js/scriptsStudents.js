@@ -52,6 +52,45 @@ function loadStudents() {
 }
 loadStudents();
 
+document.querySelector("#update").addEventListener('click',()=>{
+    const  xhr = new XMLHttpRequest()
+
+
+    xhr.open("POST","http://localhost:3008/sample-jakarta/affiliated_update",true)
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange=function (){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            if(xhr.responseText){
+                let data = JSON.parse(xhr.response)
+
+                for(let item of data) {
+                    console.log("aa")
+                    let eventString = item.event;
+                    let eventNameMatch = eventString.match(/name='(.*?)'/);
+                    let eventDescriptionMatch = eventString.match(/description='(.*?)'/);
+                    let disciplineMatch = eventString.match(/discipline=Discipline{(.*?)}/);
+
+                    let disciplineString = disciplineMatch[1];
+                    let disciplineNameMatch = disciplineString.match(/name='(.*?)'/);
+                    let disciplineDescriptionMatch = disciplineString.match(/description='(.*?)'/);
+                    let disciplineGroupMatch = disciplineString.match(/group=(\w+)/);
+
+                    location.href = "../pages/formUpdateAffiliated.php?name=" + item.name + "&lastName=" + item.lastName + "&dni=" + item.dni + "&age=" + item.age+ "&event=" + eventNameMatch[1];
+                }
+            }else{
+                alert("Consulta no satisfactoria")
+            }
+        }
+    }
+
+    var dni = document.querySelector("#dni2").value
+    console.log(dni)
+
+    var data = `dni=${dni}`
+
+    xhr.send(data)
+})
 document.querySelector("#delete").addEventListener('click',(event)=>{
     const  xhr = new XMLHttpRequest()
 

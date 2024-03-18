@@ -13,6 +13,8 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import static com.mongodb.client.model.Filters.eq;
+
 
 public class ConnectionEvent {
     private Document document;
@@ -61,12 +63,12 @@ public class ConnectionEvent {
         return line;
     }
 
-    public Event updateEvent(ObjectId id, Event event){
-        Bson query = Filters.eq("_id",id);
+    public Event updateEvent(String dni, Event event){
+        Bson query = eq("dni",dni);
         Bson updates = Updates.combine(
                 Updates.set("name",event.getName()),
                 Updates.set("description",event.getDescription()),
-                Updates.set("discipline",event.getDiscipline())
+                Updates.set("discipline",event.getDiscipline().toString())
         );
 
         UpdateResult upResult = collection.updateOne(query,updates);
@@ -74,7 +76,7 @@ public class ConnectionEvent {
     }
 
     public boolean deleteEvent(ObjectId id){
-        Bson query = Filters.eq("_id",id);
+        Bson query = eq("_id",id);
         DeleteResult deleteResult = collection.deleteOne(query);
         if(deleteResult.getDeletedCount() > 0){
             return true;
