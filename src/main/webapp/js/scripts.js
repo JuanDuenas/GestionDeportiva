@@ -10,6 +10,7 @@ document.querySelector("#btn").addEventListener('click',()=>{
         if(xhr.readyState === 4 && xhr.status === 200){
            if(xhr.responseText){
                alert("inserción satisfactoria")
+               location.href = "../sample-jakarta/pages/managmentStudent.html"
            }else{
                alert("inserción no satisfactoria")
            }
@@ -20,8 +21,10 @@ document.querySelector("#btn").addEventListener('click',()=>{
     var dni = document.querySelector("#dni").value
     var age = document.querySelector("#age").value
     var event = document.querySelector("#events").value
+    var podium = document.querySelector("#podium").value
 
-    var data = `name=${name}&lastName=${lastName}&dni=${dni}&age=${age}&event=${event}`
+
+    var data = `name=${name}&lastName=${lastName}&dni=${dni}&age=${age}&event=${event}&podium=${podium}`
 
     xhr.send(data)
 

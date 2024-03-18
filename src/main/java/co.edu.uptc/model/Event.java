@@ -5,11 +5,13 @@ public class Event {
     private String name;
     private String description;
     private Discipline discipline;
+    private Integer podium;
 
-    public Event(String name, String description, Discipline discipline) {
+    public Event(String name, String description, Discipline discipline,Integer podium) {
         this.name = name;
         this.description = description;
         this.discipline = discipline;
+        this.podium = podium;
     }
 
     public String getId() {
@@ -47,14 +49,22 @@ public class Event {
         this.discipline = discipline;
     }
 
+    public Integer getPodium() {
+        return podium;
+    }
 
+    public void setPodium(Integer podium) {
+        this.podium = podium;
+    }
 
     @Override
     public String toString() {
         return "Event{" +
-                "name='" + name + '\'' +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", discipline=" + discipline +
+                ", podium=" + podium +
                 '}';
     }
 }

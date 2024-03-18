@@ -4,17 +4,21 @@ let ln = params.get('lastName')
 let d = params.get('dni')
 let a = params.get('age')
 let ne = params.get('event')
+let p = params.get('podium')
+
 const nameInput = document.querySelector("#name")
 const lastNameInput = document.querySelector("#lastName")
 const dniInput = document.querySelector("#dni")
 const ageInput = document.querySelector("#age")
 const eventInput = document.querySelector("#events")
+const podiumInput = document.querySelector("#podium")
 
 nameInput.value = n
 lastNameInput.value = ln
 dniInput.value = d
 ageInput.value = a
-console.log(ne)
+podiumInput.value = p
+
 if(ne == "Torneo Escolar de Fútbol"){
     eventInput.value = 1
 }
@@ -42,6 +46,7 @@ document.querySelector("#btn").addEventListener('click',()=>{
         if(xhr.readyState === 4 && xhr.status === 200){
             if(xhr.responseText){
                 alert("actualización satisfactoria")
+                location.href = "../pages/managmentStudent.html"
             }else{
                 alert("actualización no satisfactoria")
             }
@@ -52,8 +57,9 @@ document.querySelector("#btn").addEventListener('click',()=>{
     var dni = document.querySelector("#dni").value
     var age = document.querySelector("#age").value
     var event = document.querySelector("#events").value
+    var podium = document.querySelector("#podium").value
 
-    var data = `name=${name}&lastName=${lastName}&dni=${dni}&age=${age}&event=${event}`
+    var data = `name=${name}&lastName=${lastName}&dni=${dni}&age=${age}&event=${event}&podium=${podium}`
 
     xhr.send(data)
 })
@@ -70,6 +76,7 @@ window.onload = function() {
     container.style.padding = "20px";
     container.style.textAlign = "center";
     container.style.clipPath = "polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)";
+    container.style.marginBottom = "100px"
 
 
 
@@ -130,42 +137,4 @@ window.onload = function() {
         subtitles[i].style.borderTopRightRadius = altura / 2 + 'px';
         subtitles[i].style.borderBottomRightRadius = altura / 2 + 'px';
     }
-
-    var tabla = document.getElementById('miTabla');
-    tabla.style.width = '100%';
-    tabla.style.borderCollapse = 'collapse';
-
-    var celdas = tabla.getElementsByTagName('td');
-    for (var i = 0; i < celdas.length; i++) {
-        celdas[i].style.border = '1px solid #ddd';
-        celdas[i].style.padding = '8px';
-        celdas[i].style.textAlign = 'center';
-    }
-    var encabezados = tabla.getElementsByTagName('th');
-    for (var i = 0; i < encabezados.length; i++) {
-        encabezados[i].style.backgroundColor = '#f2f2f2';
-        encabezados[i].style.color = 'black';
-        encabezados[i].style.padding = '12px';
-    }
-
-    // Establecer un estilo para las filas al pasar el mouse
-    tabla.onmouseover = function(event) {
-        if (event.target.tagName === 'TD') {
-            event.target.style.backgroundColor = '#f5f5f5';
-        }
-    };
-
-    // Revertir el estilo de las filas cuando el mouse deja la celda
-    tabla.onmouseout = function(event) {
-        if (event.target.tagName === 'TD') {
-            event.target.style.backgroundColor = '';
-        }
-    }
-
-    var name = document.querySelector("#name").value
-    var lastName = document.querySelector("#lastName").value
-    var dni = document.querySelector("#dni").value
-    var age = document.querySelector("#age").value
-
-    var data = `name=${name}&lastName=${lastName}&dni=${dni}&age=${age}`
 };

@@ -13,10 +13,10 @@
     <a href="pages/managmentStudent.html" style="text-decoration: none" class="button">Gestionar Estudiantes</a>
 </div>
 
-<div style="height: 100px">
+<div style="height: 200px">
     <div class="container" style="width: 60%">
         <div class="mb-3">
-            <h2 class="display-5" id="register">REGISTRATE</h2>
+            <h4 class="display-5" id="register">ACTUALIZAR DATOS</h4>
         </div>
         <div class="mb-3">
             <label class="form-label">Nombre: </label>
@@ -43,7 +43,10 @@
                 <option value="5">Copa Atletismo Escolar</option>
             </select>
         </div>
-
+        <div class="mb-3">
+            <label class="form-label">Podium: </label>
+            <input class="form-control" type="number" id="podium" name="podium" size="30">
+        </div>
         <button style="color: black;border: 2px solid black;border-radius: 10px;cursor: pointer;padding: 10px 20px;margin: 20px" id="btn" type="button">ENVIAR</button>
     </div>
 

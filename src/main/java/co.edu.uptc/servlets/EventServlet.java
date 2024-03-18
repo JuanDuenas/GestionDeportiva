@@ -41,12 +41,15 @@ public class EventServlet extends HttpServlet {
         resp.setContentType("application/json");
 
         String name,description,discipline;
+        int podium;
         String descriptionDiscipline = "";
         boolean isGroup = false;
 
         name = req.getParameter("name");
         description = req.getParameter("description");
         discipline = req.getParameter("discipline");
+        podium = Integer.parseInt(req.getParameter("podium"));
+
         if(discipline.equals("Fútbol")){
             descriptionDiscipline = "Se juega mediante una pelota que se debe desplazar a través del campo con cualquier parte del cuerpo que no sean los brazos o las manos, y mayoritariamente con los pies (de ahí su nombre). El objetivo es introducirla dentro de la portería o arco contrario, acción que se denomina marcar un gol";
             isGroup = true;
@@ -59,7 +62,7 @@ public class EventServlet extends HttpServlet {
             isGroup = true;
         }
 
-        Event event = new Event(name,description,new Discipline(discipline,descriptionDiscipline,isGroup));
+        Event event = new Event(name,description,new Discipline(discipline,descriptionDiscipline,isGroup),podium);
         PrintWriter out = resp.getWriter();
         if(eventService.inserEvent(event) != null){
             out.println(event);

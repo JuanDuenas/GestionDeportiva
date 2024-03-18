@@ -1,23 +1,3 @@
-document.querySelector("#btn").addEventListener('click',()=>{
-    const  xhr = new XMLHttpRequest()
-
-
-    xhr.open("POST","http://localhost:3008/sample-jakarta/event_servlet")
-    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-    xhr.onreadystatechange=function (){
-        if(xhr.readyState === 4 && xhr.status === 200){
-            console.log(xhr.responseText)
-        }
-    }
-    var name = document.querySelector("#name").value
-    var description = document.querySelector("#description").value
-    var discipline = document.querySelector("#discipline").value
-
-    var data = `name=${name}&description=${description}&discipline=${discipline}`
-    xhr.send(data)
-
-})
 window.onload = function() {
     const  xhr = new XMLHttpRequest()
 
@@ -28,7 +8,6 @@ window.onload = function() {
     xhr.onreadystatechange=function (){
         if(xhr.readyState === 4 && xhr.status === 200){
             if(xhr.responseText){
-                //alert("Consulta satisfactoria:\n"+xhr.response)
                 let data = JSON.parse(xhr.response)
 
                 let res = document.querySelector("#res")
@@ -42,10 +21,13 @@ window.onload = function() {
 
                     res.innerHTML += `<tr>
                         <td>${count}</td>
+                        <td>${item.podium}</td>
+                        <td>${item.id}</td>
                         <td>${item.name}</td>
                         <td>${item.description}</td>
                         <td>${nameMatch[1]}</td>
                         <td>${descriptionMatch[1]}</td>
+                        
                     </tr>`
                     count++
                 }
@@ -72,17 +54,13 @@ window.onload = function() {
     container.style.textAlign = "center";
     container.style.clipPath = "polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)";
 
-    var containerText = document.querySelector(".containerText");
-    containerText.style.backgroundColor = "#FFFFFF";  // Establece un color de fondo RGBA
-    containerText.style.padding = "20px";
-    containerText.style.textAlign = "center";
 
     var header = document.querySelector(".header");
     header.style.color = "white";
     header.style.fontSize = "20px";
     header.style.margin = "0";  // Elimina el espacio alrededor del texto
 
-    var header2 = document.querySelector(".header2");
+    var header2 = document.querySelector("#header2");
     header2.style.color = "white";
     header2.style.fontSize = "40px";
     header2.style.margin = "0";  // Elimina el espacio alrededor del texto

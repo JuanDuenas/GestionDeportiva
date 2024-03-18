@@ -9,14 +9,16 @@ function loadStudents() {
         if(xhr.readyState === 4 && xhr.status === 200){
             if(xhr.responseText){
                 //alert("Consulta satisfactoria:\n"+xhr.response)
-                let data = JSON.parse(xhr.response)
+                let data = JSON.parse(xhr.responseText)
                 let res = document.querySelector("#res")
+                console.log(xhr.responseText)
                 res.innerHTML = ''
                 var count = 1
 
                 for(let item of data){
                     let eventString = item.event;
                     let eventNameMatch = eventString.match(/name='(.*?)'/);
+                    let podiumMatch = eventString.match(/podium=(\d+)/);
                     let eventDescriptionMatch = eventString.match(/description='(.*?)'/);
                     let disciplineMatch = eventString.match(/discipline=Discipline{(.*?)}/);
 
@@ -32,14 +34,11 @@ function loadStudents() {
                         <td>${item.dni}</td>
                         <td>${item.age}</td>
                         <td>${eventNameMatch[1]}</td>
+                        <td>${podiumMatch[1]}</td>
                         <td>${disciplineNameMatch[1]}</td>
                     </tr>`
                     count++
                 }
-
-
-
-
 
             }else{
                 alert("Consulta no satisfactoria")
@@ -70,13 +69,13 @@ document.querySelector("#update").addEventListener('click',()=>{
                     let eventNameMatch = eventString.match(/name='(.*?)'/);
                     let eventDescriptionMatch = eventString.match(/description='(.*?)'/);
                     let disciplineMatch = eventString.match(/discipline=Discipline{(.*?)}/);
-
+                    let podiumMatch = eventString.match(/podium=(\d+)/);
                     let disciplineString = disciplineMatch[1];
                     let disciplineNameMatch = disciplineString.match(/name='(.*?)'/);
                     let disciplineDescriptionMatch = disciplineString.match(/description='(.*?)'/);
                     let disciplineGroupMatch = disciplineString.match(/group=(\w+)/);
 
-                    location.href = "../pages/formUpdateAffiliated.php?name=" + item.name + "&lastName=" + item.lastName + "&dni=" + item.dni + "&age=" + item.age+ "&event=" + eventNameMatch[1];
+                    location.href = "../pages/formUpdateAffiliated.php?name=" + item.name + "&lastName=" + item.lastName + "&dni=" + item.dni + "&age=" + item.age+ "&event=" + eventNameMatch[1]+ "&podium=" + podiumMatch[1];
                 }
             }else{
                 alert("Consulta no satisfactoria")

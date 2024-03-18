@@ -64,19 +64,22 @@ public class ConnectionEvent {
     }
 
     public Event updateEvent(String dni, Event event){
-        Bson query = eq("dni",dni);
+        Bson query = eq("id",dni);
+
         Bson updates = Updates.combine(
                 Updates.set("name",event.getName()),
                 Updates.set("description",event.getDescription()),
+                Updates.set("podium",event.getPodium()),
                 Updates.set("discipline",event.getDiscipline().toString())
         );
 
         UpdateResult upResult = collection.updateOne(query,updates);
+        System.out.println(upResult.getModifiedCount());
         return event;
     }
 
     public boolean deleteEvent(ObjectId id){
-        Bson query = eq("_id",id);
+        Bson query = eq("id",id);
         DeleteResult deleteResult = collection.deleteOne(query);
         if(deleteResult.getDeletedCount() > 0){
             return true;
