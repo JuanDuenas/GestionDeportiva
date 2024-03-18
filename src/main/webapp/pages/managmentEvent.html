@@ -16,6 +16,29 @@
   <a href="managmentStudent.html" style="text-decoration: none" class="button">Gestionar Estudiantes</a>
 </div>
 
+<div class="container" style="width: 60%">
+  <div class="mb-3">
+    <h2 class="display-5" id="register">REGISTRA EVENTOS</h2>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Nombre: </label>
+    <input class="form-control" type="text" id="name" name="name" size="30">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Descripción: </label>
+    <input class="form-control" type="text" id="description" name="description" size="30">
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Disciplina: </label>
+    <select id="discipline">
+      <option value="Natación">Natación</option>
+      <option value="Fútbol">Fútbol</option>
+      <option value="Baloncesto">Baloncesto</option>
+    </select>
+  </div>
+  <input style="color: black;border: 2px solid black;border-radius: 10px;cursor: pointer;padding: 10px 20px;margin: 20px" id="btn" type="submit">
+</div>
+
 <div>
   <table class="table">
     <thead class="thead-dark">
@@ -24,9 +47,10 @@
       <th scope="col">Nombre</th>
       <th scope="col">Descripción</th>
       <th scope="col">Disciplina</th>
+      <th scope="col">Descripción</th>
     </tr>
     </thead>
-    <tbody>
+    <tbody id="res">
     <tr>
       <th scope="row"></th>
       <td></td>

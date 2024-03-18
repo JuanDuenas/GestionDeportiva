@@ -19,8 +19,9 @@ document.querySelector("#btn").addEventListener('click',()=>{
     var lastName = document.querySelector("#lastName").value
     var dni = document.querySelector("#dni").value
     var age = document.querySelector("#age").value
+    var event = document.querySelector("#events").value
 
-    var data = `name=${name}&lastName=${lastName}&dni=${dni}&age=${age}`
+    var data = `name=${name}&lastName=${lastName}&dni=${dni}&age=${age}&event=${event}`
 
     xhr.send(data)
 

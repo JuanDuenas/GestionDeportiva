@@ -8,15 +8,14 @@ public class Affiliated {
     private String lastName;
     private String dni;
     private Integer age;
-    private List<Event> listEvents;
+    private Event event;
 
-    public Affiliated(String id, String name, String lastName, String dni, Integer age, List<Event> listEvents) {
-        this.id = id;
+    public Affiliated(String name, String lastName, String dni, Integer age, Event event) {
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;
         this.age = age;
-        this.listEvents = listEvents;
+        this.event = event;
     }
 
     public Affiliated(String name, String lastName, String dni, Integer age) {
@@ -34,8 +33,16 @@ public class Affiliated {
                 ", lastName='" + lastName + '\'' +
                 ", dni='" + dni + '\'' +
                 ", age=" + age +
-                ", listEvents=" + listEvents +
+                ", event=" + event +
                 '}';
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
     }
 
     public String getId() {

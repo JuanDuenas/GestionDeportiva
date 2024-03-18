@@ -1,4 +1,64 @@
+document.querySelector("#btn").addEventListener('click',()=>{
+    const  xhr = new XMLHttpRequest()
+
+
+    xhr.open("POST","http://localhost:3008/sample-jakarta/event_servlet")
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange=function (){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            console.log(xhr.responseText)
+        }
+    }
+    var name = document.querySelector("#name").value
+    var description = document.querySelector("#description").value
+    var discipline = document.querySelector("#discipline").value
+
+    var data = `name=${name}&description=${description}&discipline=${discipline}`
+    xhr.send(data)
+
+})
 window.onload = function() {
+    const  xhr = new XMLHttpRequest()
+
+
+    xhr.open("GET","http://localhost:3008/sample-jakarta/event_servlet")
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange=function (){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            if(xhr.responseText){
+                //alert("Consulta satisfactoria:\n"+xhr.response)
+                let data = JSON.parse(xhr.response)
+
+                let res = document.querySelector("#res")
+                res.innerHTML = ''
+                var count = 1
+                for(let item of data){
+                    let disciplineString = item.discipline;
+                    let nameMatch = disciplineString.match(/name='(.*?)'/);
+                    let descriptionMatch = disciplineString.match(/description='(.*?)'/);
+                    let groupMatch = disciplineString.match(/group=(\w+)/);
+
+                    res.innerHTML += `<tr>
+                        <td>${count}</td>
+                        <td>${item.name}</td>
+                        <td>${item.description}</td>
+                        <td>${nameMatch[1]}</td>
+                        <td>${descriptionMatch[1]}</td>
+                    </tr>`
+                    count++
+                }
+
+            }else{
+                alert("Consulta no satisfactoria")
+            }
+        }
+    }
+
+    xhr.send(null)
+
+
     document.body.style.backgroundColor = "#f5f5f5";
     document.body.style.fontFamily = "Arial, sans-serif";
 

@@ -23,7 +23,7 @@ public class AffiliatedService {
         return c.update(id,affiliated);
     }
 
-    public boolean deleteAffiliated(ObjectId id){
-        return c.delete(id);
+    public boolean deleteAffiliated(String dni){
+        return c.delete(dni);
     }
 }

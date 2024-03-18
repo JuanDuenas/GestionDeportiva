@@ -10,21 +10,36 @@ function loadStudents() {
             if(xhr.responseText){
                 //alert("Consulta satisfactoria:\n"+xhr.response)
                 let data = JSON.parse(xhr.response)
-
                 let res = document.querySelector("#res")
                 res.innerHTML = ''
                 var count = 1
+
                 for(let item of data){
+                    let eventString = item.event;
+                    let eventNameMatch = eventString.match(/name='(.*?)'/);
+                    let eventDescriptionMatch = eventString.match(/description='(.*?)'/);
+                    let disciplineMatch = eventString.match(/discipline=Discipline{(.*?)}/);
+
+                    let disciplineString = disciplineMatch[1];
+                    let disciplineNameMatch = disciplineString.match(/name='(.*?)'/);
+                    let disciplineDescriptionMatch = disciplineString.match(/description='(.*?)'/);
+                    let disciplineGroupMatch = disciplineString.match(/group=(\w+)/);
+
                     res.innerHTML += `<tr>
-                        <th scope="row"></th>
                         <td>${count}</td>
                         <td>${item.name}</td>
                         <td>${item.lastName}</td>
                         <td>${item.dni}</td>
                         <td>${item.age}</td>
+                        <td>${eventNameMatch[1]}</td>
+                        <td>${disciplineNameMatch[1]}</td>
                     </tr>`
                     count++
                 }
+
+
+
+
 
             }else{
                 alert("Consulta no satisfactoria")
@@ -36,6 +51,31 @@ function loadStudents() {
 
 }
 loadStudents();
+
+document.querySelector("#delete").addEventListener('click',(event)=>{
+    const  xhr = new XMLHttpRequest()
+
+
+    xhr.open("POST","http://localhost:3008/sample-jakarta/affiliated_delete",true)
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+    xhr.onreadystatechange=function (){
+        if(xhr.readyState === 4 && xhr.status === 200){
+            if(xhr.responseText){
+                alert("Eliminación satisfactoria")
+            }else{
+                alert("Eliminación no satisfactoria")
+            }
+        }
+    }
+
+    var dni = document.querySelector("#dni").value
+    console.log(dni)
+
+    var data = `dni=${dni}`
+
+    xhr.send(data)
+})
 
 function onload() {
     document.body.style.backgroundColor = "#f5f5f5";
@@ -50,11 +90,6 @@ function onload() {
     container.style.padding = "20px";
     container.style.textAlign = "center";
     container.style.clipPath = "polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%)";
-
-    var containerText = document.querySelector(".containerText");
-    containerText.style.backgroundColor = "#FFFFFF";  // Establece un color de fondo RGBA
-    containerText.style.padding = "20px";
-    containerText.style.textAlign = "center";
 
     var header = document.querySelector("#header");
     header.style.color = "white";
@@ -97,43 +132,5 @@ function onload() {
         sections[i].style.color = "#191B25";
         sections[i].style.font = "inherit";
     }
-
-
-
-    var body = document.getElementsByTagName("body")[0];
-
-    // Crea un elemento <table> y un elemento <tbody>
-    var tabla = document.createElement("table");
-    var tblBody = document.createElement("tbody");
-
-    // Crea las celdas
-    for (var i = 0; i < 6; i++) {
-        // Crea las hileras de la tabla
-        var hilera = document.createElement("tr");
-
-        for (var j = 0; j < 2; j++) {
-            // Crea un elemento <td> y un nodo de texto, haz que el nodo de
-            // texto sea el contenido de <td>, ubica el elemento <td> al final
-            // de la hilera de la tabla
-            var celda = document.createElement("td");
-            var textoCelda = document.createTextNode(
-                "celda en la hilera " + i + ", columna " + j,
-            );
-            celda.appendChild(textoCelda);
-            hilera.appendChild(celda);
-        }
-
-        // agrega la hilera al final de la tabla (al final del elemento tblbody)
-        tblBody.appendChild(hilera);
-    }
-
-    // posiciona el <tbody> debajo del elemento <table>
-    tabla.appendChild(tblBody);
-    // appends <table> into <body>
-    body.appendChild(tabla);
-    // modifica el atributo "border" de la tabla y lo fija a "2";
-    tabla.setAttribute("border", "2");
-
-
 }
 onload()

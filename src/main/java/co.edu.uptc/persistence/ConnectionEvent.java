@@ -1,6 +1,6 @@
 package co.edu.uptc.persistence;
 
-import co.edu.uptc.model.Affiliated;
+import co.edu.uptc.model.Event;
 import com.mongodb.*;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
@@ -13,16 +13,12 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
-import java.util.ArrayList;
-import java.util.List;
 
-public class Connection {
-    private List<Document> listAffiliateds;
+public class ConnectionEvent {
     private Document document;
     private MongoCollection<Document> collection;
 
-    public Connection(){
-        listAffiliateds = new ArrayList<>();
+    public ConnectionEvent(){
         MongoClientURI mongoClientURI = new MongoClientURI("mongodb+srv://julianvelandia01:WyjuRjMC2v85M7WB@cluster0.dtddx5y.mongodb.net/");
         MongoClient mongoClient = new MongoClient(mongoClientURI);
 
@@ -32,23 +28,21 @@ public class Connection {
         }else{
             System.out.println("Database not connected");
         }
-        collection = mongoDatabase.getCollection("affiliated");
+        collection = mongoDatabase.getCollection("event");
 
     }
 
-    public Affiliated insert(Affiliated affiliated){
-        System.out.println(affiliated);
-        Document document = new Document("name",affiliated.getName())
-                .append("lastName",affiliated.getLastName())
-                .append("dni",affiliated.getDni())
-                .append("age",affiliated.getAge())
-                .append("event",affiliated.getEvent().toString());
+    public Event insertEvent(Event event){
+        Document document = new Document("id",event.getId())
+                .append("name",event.getName())
+                .append("description",event.getDescription())
+                .append("discipline",event.getDiscipline().toString());
 
         collection.insertOne(document);
-        return affiliated;
+        return event;
     }
 
-    public String getAffiliated(){
+    public String getEvent(){
         String line = "[";
         try(MongoCursor<Document> cursor = collection.find().iterator()){
             long count = 1;
@@ -62,27 +56,26 @@ public class Connection {
 
             }
             line+="]";
+            System.out.println(line);
         }
         return line;
     }
 
-    public Affiliated update(ObjectId id, Affiliated affiliated){
+    public Event updateEvent(ObjectId id, Event event){
         Bson query = Filters.eq("_id",id);
         Bson updates = Updates.combine(
-                Updates.set("name",affiliated.getName()),
-                Updates.set("lastName",affiliated.getLastName()),
-                Updates.set("dni",affiliated.getDni()),
-                Updates.set("age",affiliated.getAge())
+                Updates.set("name",event.getName()),
+                Updates.set("description",event.getDescription()),
+                Updates.set("discipline",event.getDiscipline())
         );
 
         UpdateResult upResult = collection.updateOne(query,updates);
-        return affiliated;
+        return event;
     }
 
-    public boolean delete(String dni){
-        Bson query = Filters.eq("dni",dni);
+    public boolean deleteEvent(ObjectId id){
+        Bson query = Filters.eq("_id",id);
         DeleteResult deleteResult = collection.deleteOne(query);
-        System.out.println(dni);
         if(deleteResult.getDeletedCount() > 0){
             return true;
         }

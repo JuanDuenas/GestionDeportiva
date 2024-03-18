@@ -11,12 +11,13 @@
 <body>
 <div class="container">
     <div id="header" class="header">GUILLERMO LEON VALENCIA</div>
-    <div class="header2">CLUB DEPORTIVO</div>
+    <div id="header2">CLUB DEPORTIVO</div>
     <a href="managmentEvent.html" style="text-decoration: none" class="button">Gestionar Eventos</a>
     <a href="../index.html" style="text-decoration: none" class="button">Inicio</a>
 </div>
+<div style="width: 50px"></div>
 <div>
-    <table class="table">
+    <table class="table" id="table">
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
@@ -24,11 +25,35 @@
             <th scope="col">Apellido</th>
             <th scope="col">DNI</th>
             <th scope="col">Edad</th>
+            <th scope="col">Evento</th>
+            <th scope="col">Disciplina</th>
         </tr>
         </thead>
         <tbody id="res">
         </tbody>
     </table>
+    <div style="width: 50px"></div>
+    <div class="row">
+        <div class="col" style="width: 60%; margin: 10px">
+                <h5>ACTUALIZAR</h5>
+                <div style="margin-bottom: 15px;margin-top: 15px" class="d-flex flex-column flex-sm-row w-100 gap-2 inputs">
+                    <input name="text" type="text" id="dni2" class="form-control" placeholder="DNI">
+                </div>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2 inputs">
+                    <input id="update" class="btn btn-warning" type="submit">
+                </div>
+
+        </div>
+        <div class="col" style="width: 60%; margin: 10px">
+                <h5>ELIMINAR</h5>
+                <div style="margin-bottom: 15px;margin-top: 15px" class="d-flex flex-column flex-sm-row w-100 gap-2 inputs">
+                    <input name="dni" type="text" id="dni" class="form-control" placeholder="DNI">
+                </div>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2 inputs">
+                    <input id="delete" class="btn btn-danger" type="submit">
+                </div>
+        </div>
+    </div>
 </div>
 <script src="../js/scriptsStudents.js"></script>
 </body>
